@@ -3,4 +3,10 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="action_location_tool">Location Tool</string>
+
+    <!--Alerts-->
+    <string name="alert_no_settings">Not enough features for settings, yet</string>
 </resources>
