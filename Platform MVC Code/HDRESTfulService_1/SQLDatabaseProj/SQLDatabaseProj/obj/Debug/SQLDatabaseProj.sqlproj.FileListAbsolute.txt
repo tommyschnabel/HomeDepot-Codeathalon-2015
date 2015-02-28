@@ -1,0 +1,9 @@
+C:\Users\Vodrie\Documents\Visual Studio 2013\Projects\HDRESTfulService_1\SQLDatabaseProj\SQLDatabaseProj\bin\Debug\SQLDatabaseProj.dacpac
+C:\Users\Vodrie\Documents\Visual Studio 2013\Projects\HDRESTfulService_1\SQLDatabaseProj\SQLDatabaseProj\obj\Debug\SQLDatabaseProj.dll
+C:\Users\Vodrie\Documents\Visual Studio 2013\Projects\HDRESTfulService_1\SQLDatabaseProj\SQLDatabaseProj\obj\Debug\SQLDatabaseProj.pdb
+C:\Users\Vodrie\Documents\Visual Studio 2013\Projects\HDRESTfulService_1\SQLDatabaseProj\SQLDatabaseProj\bin\Debug\SQLDatabaseProj.dll
+C:\Users\Vodrie\Documents\Visual Studio 2013\Projects\HDRESTfulService_1\SQLDatabaseProj\SQLDatabaseProj\bin\Debug\SQLDatabaseProj.pdb
+C:\Users\Vodrie\Documents\Visual Studio 2013\Projects\HDRESTfulService_1\SQLDatabaseProj\SQLDatabaseProj\obj\Debug\Model.xml
+C:\Users\Vodrie\Documents\Visual Studio 2013\Projects\HDRESTfulService_1\SQLDatabaseProj\SQLDatabaseProj\obj\Debug\refactor.xml
+C:\Users\Vodrie\Documents\Visual Studio 2013\Projects\HDRESTfulService_1\SQLDatabaseProj\SQLDatabaseProj\obj\Debug\postdeploy.sql
+C:\Users\Vodrie\Documents\Visual Studio 2013\Projects\HDRESTfulService_1\SQLDatabaseProj\SQLDatabaseProj\obj\Debug\predeploy.sql

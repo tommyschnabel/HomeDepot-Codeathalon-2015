@@ -26,5 +26,23 @@ namespace HDRESTful_Service.Controllers
 
             return View();
         }
+        [HttpPost]
+        public JsonResult mLogin()
+        {
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult RetrieveMapDetails()
+        {
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult mRetrieveMapDetails()
+        {
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
     }
 }

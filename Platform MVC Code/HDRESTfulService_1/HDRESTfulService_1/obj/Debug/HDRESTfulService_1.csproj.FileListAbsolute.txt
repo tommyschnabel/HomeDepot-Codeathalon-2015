@@ -1,0 +1,5 @@
+c:\users\vodrie\documents\visual studio 2013\Projects\HDRESTfulService_1\HDRESTfulService_1\bin\Debug\HDRESTfulService_1.dll
+c:\users\vodrie\documents\visual studio 2013\Projects\HDRESTfulService_1\HDRESTfulService_1\bin\Debug\HDRESTfulService_1.pdb
+c:\users\vodrie\documents\visual studio 2013\Projects\HDRESTfulService_1\HDRESTfulService_1\obj\Debug\HDRESTfulService_1.dll
+c:\users\vodrie\documents\visual studio 2013\Projects\HDRESTfulService_1\HDRESTfulService_1\obj\Debug\HDRESTfulService_1.pdb
+c:\users\vodrie\documents\visual studio 2013\Projects\HDRESTfulService_1\HDRESTfulService_1\obj\Debug\HDRESTfulService_1.csprojResolveAssemblyReference.cache
