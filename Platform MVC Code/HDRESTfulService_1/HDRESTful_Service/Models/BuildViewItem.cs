@@ -14,7 +14,7 @@ namespace HDRESTful_Service.Models
     public partial class BuildViewItem
     {
         public int itemID { get; set; }
-        public string typeID { get; set; }
+        public int typeID { get; set; }
         public string itemName { get; set; }
         public string typeName { get; set; }
     }

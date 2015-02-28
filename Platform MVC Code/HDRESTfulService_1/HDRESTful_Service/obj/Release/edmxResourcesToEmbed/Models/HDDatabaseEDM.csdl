@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HDDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HDDatabaseEntitiesAzure" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Types" EntityType="HDDatabaseModel.Types" />
+    <EntitySet Name="Items" EntityType="HDDatabaseModel.Items" />
+    <AssociationSet Name="TypesItems" Association="HDDatabaseModel.TypesItems">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="Items" EntitySet="Items" />
+    </AssociationSet>
+    <FunctionImport Name="BuildBestFitItem" ReturnType="Collection(HDDatabaseModel.BuildBestFitItem)">
+      <Parameter Name="ItemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="BuildViewItem" ReturnType="Collection(HDDatabaseModel.BuildViewItem)">
+      <Parameter Name="ItemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="FindItemInformation" ReturnType="Collection(HDDatabaseModel.FindItemInformation_Result)">
+      <Parameter Name="ItemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="FindTypeInformation" ReturnType="Collection(HDDatabaseModel.FindTypeInformation_Result)">
+      <Parameter Name="TypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Types">
+    <Key>
+      <PropertyRef Name="typeID" />
+    </Key>
+    <Property Name="typeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Items" Relationship="HDDatabaseModel.TypesItems" FromRole="Types" ToRole="Items" />
+    <Property Name="typeName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Lat" Type="Double" Nullable="false" />
+    <Property Name="Lng" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Items">
+    <Key>
+      <PropertyRef Name="itemID" />
+    </Key>
+    <Property Name="itemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Type" Relationship="HDDatabaseModel.TypesItems" FromRole="Items" ToRole="Types" />
+    <Property Name="typeID" Type="Int32" Nullable="false" />
+    <Property Name="itemName" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="TypesItems">
+    <End Type="HDDatabaseModel.Types" Role="Types" Multiplicity="1" />
+    <End Type="HDDatabaseModel.Items" Role="Items" Multiplicity="*" />
+  </Association>
+  <ComplexType Name="BuildBestFitItem">
+    <Property Type="Int32" Name="itemID" Nullable="false" />
+    <Property Type="String" Name="typeID" Nullable="false" />
+    <Property Type="String" Name="itemName" Nullable="false" />
+    <Property Type="String" Name="typeName" Nullable="true" />
+    <Property Type="Double" Name="Lat" Nullable="true" />
+    <Property Type="Double" Name="Lng" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="BuildViewItem">
+    <Property Type="Int32" Name="itemID" Nullable="false" />
+    <Property Type="String" Name="typeID" Nullable="false" />
+    <Property Type="String" Name="itemName" Nullable="false" />
+    <Property Type="String" Name="typeName" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="FindItemInformation_Result">
+    <Property Type="Int32" Name="itemID" Nullable="false" />
+    <Property Type="String" Name="itemName" Nullable="false" />
+    <Property Type="String" Name="typeID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="FindTypeInformation_Result">
+    <Property Type="Int32" Name="typeID" Nullable="false" />
+    <Property Type="String" Name="typeName" Nullable="false" />
+    <Property Type="Double" Name="Lat" Nullable="false" />
+    <Property Type="Double" Name="Lng" Nullable="false" />
+  </ComplexType>
+</Schema>

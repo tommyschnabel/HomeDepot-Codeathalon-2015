@@ -9,46 +9,41 @@ namespace HDRESTful_Service.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        [HttpPost]
+        public JsonResult path()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            List<CurrentPath> currentPath = new List<CurrentPath>();
+            return Json(currentPath, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult mLogin()
+        public JsonResult current()
         {
-
-            return Json(0, JsonRequestBehavior.AllowGet);
+            
+            return Json(new ItemsViewModel(), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult RetrieveMapDetails()
+        public JsonResult delete(int ID)
         {
-
-            return Json(0, JsonRequestBehavior.AllowGet);
+            
+            return Json(new DeleteFromList(ID), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult mRetrieveMapDetails()
+        public JsonResult request()
         {
 
-            return Json(0, JsonRequestBehavior.AllowGet);
+            return Json(new AllItemsViewModel(), JsonRequestBehavior.AllowGet);
         }
-        public JsonResult mSubmitItemSelection(List<BuildViewItem> viewItem)
+        [HttpPost]
+        public JsonResult add(List<int> iDList)
         {
-            viewItem = new List<BuildView
-            return Json(0, JsonRequestBehavior.AllowGet);
+            new AddToList(iDList);
+            //List<ItemsViewModel> viewModel = new List<ItemsViewModel>();
+            return Json(new ItemsViewModel(), JsonRequestBehavior.AllowGet);
         }
     }
 }

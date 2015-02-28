@@ -28,5 +28,46 @@
         <ScalarProperty Name="itemID" ColumnName="itemID" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="BuildBestFitItem" FunctionName="HDDatabaseModel.Store.BuildBestFitItem">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HDDatabaseModel.BuildBestFitItem">
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BuildViewItem" FunctionName="HDDatabaseModel.Store.BuildViewItem">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HDDatabaseModel.BuildViewItem">
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="FindItemInformation" FunctionName="HDDatabaseModel.Store.FindItemInformation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HDDatabaseModel.FindItemInformation_Result">
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="FindTypeInformation" FunctionName="HDDatabaseModel.Store.FindTypeInformation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HDDatabaseModel.FindTypeInformation_Result">
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
