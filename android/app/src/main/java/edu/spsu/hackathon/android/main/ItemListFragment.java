@@ -21,6 +21,7 @@ public class ItemListFragment extends Fragment {
     ListView itemList;
     List<Item> items;
     ProgressBar loadingWheel;
+    ItemArrayAdapter itemArrayAdapter;
 
     @Nullable
     @Override
@@ -35,12 +36,17 @@ public class ItemListFragment extends Fragment {
         return rootView;
     }
 
-    public void setItems(List<Item> items, AdapterView.OnItemClickListener onItemClickListener) {
+    public void setItems(List<Item> items, AdapterView.OnItemClickListener onItemClickListener, AdapterView.OnItemLongClickListener onItemLongClickListener) {
         this.items = items;
-        setupListView(onItemClickListener);
+        setupListView(onItemClickListener, onItemLongClickListener);
     }
 
-    private void setupListView(AdapterView.OnItemClickListener onItemClickListener) {
+    public void refreshListView(List<Item> items) {
+        this.items = items;
+        itemArrayAdapter.notifyDataSetChanged();
+    }
+
+    private void setupListView(AdapterView.OnItemClickListener onItemClickListener, AdapterView.OnItemLongClickListener onItemLongClickListener) {
         //For good measure
         if (items == null || itemList == null) {
             return;
@@ -50,8 +56,9 @@ public class ItemListFragment extends Fragment {
 //        loadingWheel.setVisibility(View.INVISIBLE);
         itemList.setVisibility(View.VISIBLE);
         itemList.setOnItemClickListener(onItemClickListener);
+        itemList.setOnItemLongClickListener(onItemLongClickListener);
 
-        ItemArrayAdapter itemArrayAdapter = new ItemArrayAdapter(getActivity(), items);
+        itemArrayAdapter = new ItemArrayAdapter(getActivity(), items);
         itemList.setAdapter(itemArrayAdapter);
     }
 }

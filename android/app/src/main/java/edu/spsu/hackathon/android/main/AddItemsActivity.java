@@ -98,6 +98,9 @@ public class AddItemsActivity extends ActionBarActivity implements GetAllItemsCa
             Intent intent = new Intent();
             intent.putExtra(ITEMS, newItemsString);
             setResult(ACTION_ADDED_ITEMS, intent);
+
+            //TODO add network call to update list
+
             finish();
 
             case R.id.action_cancel_add_items:
@@ -156,6 +159,13 @@ public class AddItemsActivity extends ActionBarActivity implements GetAllItemsCa
                 } else if (!checkedItems.contains(items.get(position).getId())) {
                     checkedItems.add(items.get(position).getId());
                 }
+            }
+        }, new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //Don't want to do anything on long click here
+                return true;
             }
         });
     }
