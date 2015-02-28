@@ -9,14 +9,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.List;
+
 import edu.spsu.hackathon.android.R;
+import edu.spsu.hackathon.android.common.Item;
+import edu.spsu.hackathon.android.common.Point;
+import edu.spsu.hackathon.android.requests.GetItemsCallback;
+import edu.spsu.hackathon.android.requests.GetPathCallback;
+import edu.spsu.hackathon.android.requests.MockGetItemsAsyncTask;
+import edu.spsu.hackathon.android.requests.MockGetPathAsyncTask;
 import edu.spsu.hackathon.android.tools.LocationViewerToolActivity;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements GetPathCallback,
+                                                               GetItemsCallback {
 
     ActionBar actionBar;
     MainPagerAdapter pagerAdapter;
     ViewPager viewPager;
+
+    List<Item> items;
+    List<Point> path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         setupPage();
+        requestInfo();
     }
 
     @Override
@@ -91,4 +104,20 @@ public class MainActivity extends ActionBarActivity {
         actionBar.addTab(actionBar.newTab().setIcon(R.mipmap.ic_action_view_as_list).setTabListener(tabListener));
         actionBar.addTab(actionBar.newTab().setIcon(R.mipmap.ic_action_directions).setTabListener(tabListener));
     }
+
+    private void requestInfo() {
+        new MockGetItemsAsyncTask(this).execute(0); //random value since you can't have a Void generic
+        new MockGetPathAsyncTask(this).execute(getResources());
+    }
+
+    @Override
+    public void onGetItemsFinished(List<Item> items) {
+
+    }
+
+    @Override
+    public void onGetPathFinished(List<Point> path) {
+
+    }
+
 }

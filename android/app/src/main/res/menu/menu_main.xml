@@ -8,8 +8,4 @@
     <item
         android:id="@+id/action_location_tool"
         android:title="@string/action_location_tool"/>
-
-    <item
-        android:id="@+id/action_test_map_fragment"
-        android:title="@string/action_to_test_map_fragment"/>
 </menu>

@@ -8,12 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.List;
+
 import edu.spsu.hackathon.android.R;
+import edu.spsu.hackathon.android.common.Item;
 
 public class ItemListFragment extends Fragment {
 
     View rootView;
     ListView itemList;
+    List<Item> items;
 
     @Nullable
     @Override
@@ -22,5 +26,24 @@ public class ItemListFragment extends Fragment {
         itemList = (ListView) rootView.findViewById(R.id.item_list);
 
         return rootView;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+        setupListView();
+    }
+
+    private void setupListView() {
+        //For good measure
+        if (items == null) {
+            return;
+        }
+
+        if (itemList == null) {
+            onCreateView(LayoutInflater.from(getActivity()), null, null);
+        }
+
+        ItemArrayAdapter itemArrayAdapter = new ItemArrayAdapter(getActivity(), items);
+        itemList.setAdapter(itemArrayAdapter);
     }
 }

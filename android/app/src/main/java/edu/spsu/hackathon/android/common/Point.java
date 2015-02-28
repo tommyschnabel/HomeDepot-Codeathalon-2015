@@ -4,10 +4,20 @@ import java.util.List;
 
 public class Point {
 
+    Integer id;
     Double lat;
     Double lng;
-    String type;
+    Type type;
     List<Integer> itemIds;
+    String connectedTo;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Double getLat() {
         return lat;
@@ -25,11 +35,11 @@ public class Point {
         this.lng = lng;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -39,5 +49,13 @@ public class Point {
 
     public void setItemIds(List<Integer> itemIds) {
         this.itemIds = itemIds;
+    }
+
+    public String getConnectedTo() {
+        return connectedTo;
+    }
+
+    public void setConnectedTo(String connectedTo) {
+        this.connectedTo = connectedTo;
     }
 }

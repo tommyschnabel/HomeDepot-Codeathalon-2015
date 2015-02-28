@@ -4,6 +4,7 @@ public class Item {
 
     Integer id;
     String name;
+    Type type;
 
     public Integer getId() {
         return id;
@@ -19,5 +20,13 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 }

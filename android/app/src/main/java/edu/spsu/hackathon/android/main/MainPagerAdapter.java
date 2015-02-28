@@ -6,7 +6,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.google.android.gms.maps.SupportMapFragment;
 
+import java.util.List;
+
+import edu.spsu.hackathon.android.common.Item;
+import edu.spsu.hackathon.android.common.Point;
+
 public class MainPagerAdapter extends FragmentPagerAdapter {
+
+    ItemListFragment itemListFragment;
+    StoreMapFragment storeMapFragment;
 
     public MainPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -22,11 +30,22 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
         case 0:
-            return new ItemListFragment();
+            itemListFragment = new ItemListFragment();
+            return itemListFragment;
         case 1:
-            return new SupportMapFragment();
+            storeMapFragment = new StoreMapFragment();
+            return storeMapFragment;
         default:
             throw new RuntimeException("Get count method isn't up to date with actual number of tabs");
         }
+    }
+
+    public void setItems(List<Item> items) {
+        itemListFragment.setItems(items);
+        storeMapFragment.setItems(items);
+    }
+
+    public void setPath(List<Point> path) {
+        storeMapFragment.setPath(path);
     }
 }
