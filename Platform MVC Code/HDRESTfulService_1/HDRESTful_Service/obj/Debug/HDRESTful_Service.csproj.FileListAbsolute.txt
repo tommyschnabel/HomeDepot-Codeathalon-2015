@@ -1,4 +1,3 @@
-c:\users\vodrie\documents\visual studio 2013\Projects\HDRESTfulService_1\HDRESTful_Service\obj\Debug\HDRESTful_Service.csprojResolveAssemblyReference.cache
 c:\users\vodrie\documents\visual studio 2013\Projects\HDRESTfulService_1\HDRESTful_Service\bin\HDRESTful_Service.dll.config
 c:\users\vodrie\documents\visual studio 2013\Projects\HDRESTfulService_1\HDRESTful_Service\bin\HDRESTful_Service.dll
 c:\users\vodrie\documents\visual studio 2013\Projects\HDRESTfulService_1\HDRESTful_Service\bin\HDRESTful_Service.pdb

@@ -15,7 +15,7 @@ namespace HDRESTful_Service.Models
     public partial class Items
     {
         public int itemID { get; set; }
-        public string typeID { get; set; }
+        public int typeID { get; set; }
         public string itemName { get; set; }
     
         public virtual Types Type { get; set; }

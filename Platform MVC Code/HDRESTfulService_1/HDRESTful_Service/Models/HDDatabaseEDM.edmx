@@ -10,7 +10,7 @@
             <PropertyRef Name="itemID" />
           </Key>
           <Property Name="itemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="typeID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="typeID" Type="int" Nullable="false" />
           <Property Name="itemName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Type_typeID" Type="int" Nullable="false" />
         </EntityType>
@@ -67,16 +67,16 @@
             <End Role="Items" EntitySet="Items" />
           </AssociationSet>
           <FunctionImport Name="BuildBestFitItem" ReturnType="Collection(HDDatabaseModel.BuildBestFitItem)">
-            <Parameter Name="ItemID" Mode="In" Type="Int32" />
+          <Parameter Name="ItemID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BuildViewItem" ReturnType="Collection(HDDatabaseModel.BuildViewItem)">
-            <Parameter Name="ItemID" Mode="In" Type="Int32" />
+          <Parameter Name="ItemID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FindItemInformation" ReturnType="Collection(HDDatabaseModel.FindItemInformation_Result)">
-            <Parameter Name="ItemID" Mode="In" Type="Int32" />
+          <Parameter Name="ItemID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FindTypeInformation" ReturnType="Collection(HDDatabaseModel.FindTypeInformation_Result)">
-            <Parameter Name="TypeID" Mode="In" Type="Int32" />
+          <Parameter Name="TypeID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Types">
@@ -95,8 +95,8 @@
           </Key>
           <Property Name="itemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Type" Relationship="HDDatabaseModel.TypesItems" FromRole="Items" ToRole="Types" />
-          <Property Name="typeID" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="itemName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="typeID" Type="Int32" Nullable="false" />
+          <Property Name="itemName" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="TypesItems">
           <End Type="HDDatabaseModel.Types" Role="Types" Multiplicity="1" />

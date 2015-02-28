@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="HDDatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="HDDatabaseModelStoreContainer">
-    <EntitySet Name="Types" EntityType="HDDatabaseModel.Store.Types" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Items" EntityType="HDDatabaseModel.Store.Items" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="TypesItems" Association="HDDatabaseModel.Store.TypesItems">
-      <End Role="Types" EntitySet="Types" />
-      <End Role="Items" EntitySet="Items" />
-    </AssociationSet>
-  </EntityContainer>
+<Schema Namespace="HDDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Items">
+    <Key>
+      <PropertyRef Name="itemID" />
+    </Key>
+    <Property Name="itemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="typeID" Type="int" Nullable="false" />
+    <Property Name="itemName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type_typeID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Types">
     <Key>
       <PropertyRef Name="typeID" />
@@ -17,18 +18,9 @@
     <Property Name="Lat" Type="float" Nullable="false" />
     <Property Name="Lng" Type="float" Nullable="false" />
   </EntityType>
-  <EntityType Name="Items">
-    <Key>
-      <PropertyRef Name="itemID" />
-    </Key>
-    <Property Name="itemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="typeID" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="itemName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Type_typeID" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="TypesItems">
-    <End Role="Types" Type="HDDatabaseModel.Store.Types" Multiplicity="1" />
-    <End Role="Items" Type="HDDatabaseModel.Store.Items" Multiplicity="*" />
+  <Association Name="FK_TypesItems">
+    <End Role="Types" Type="Self.Types" Multiplicity="1" />
+    <End Role="Items" Type="Self.Items" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Types">
         <PropertyRef Name="typeID" />
@@ -38,4 +30,24 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="BuildBestFitItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ItemID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BuildViewItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ItemID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="FindItemInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ItemID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="FindTypeInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TypeID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="HDDatabaseModelStoreContainer">
+    <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TypesItems" Association="Self.FK_TypesItems">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="Items" EntitySet="Items" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

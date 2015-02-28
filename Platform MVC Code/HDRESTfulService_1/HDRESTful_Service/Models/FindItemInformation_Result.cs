@@ -15,6 +15,6 @@ namespace HDRESTful_Service.Models
     {
         public int itemID { get; set; }
         public string itemName { get; set; }
-        public string typeID { get; set; }
+        public int typeID { get; set; }
     }
 }
