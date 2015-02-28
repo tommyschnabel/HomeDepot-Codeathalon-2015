@@ -1,6 +1,10 @@
 db.Store.insert({
 	StoreId		:	"Store 111",
 	Name	:	"Roswell",
+	zip     :   "30062"
+	Lat     :   "33.980525", 
+	Lng     :   "-84.434944",
+	zoom    :   "18",
 	Locations	:	[
 	{
 		id: "1",
