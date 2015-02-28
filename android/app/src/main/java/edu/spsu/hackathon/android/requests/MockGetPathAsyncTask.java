@@ -13,6 +13,7 @@ import java.util.List;
 import edu.spsu.hackathon.android.R;
 import edu.spsu.hackathon.android.common.Point;
 
+@Deprecated
 public class MockGetPathAsyncTask extends AsyncTask<Resources, Integer,List<Point>> {
 
     private GetPathCallback callback;

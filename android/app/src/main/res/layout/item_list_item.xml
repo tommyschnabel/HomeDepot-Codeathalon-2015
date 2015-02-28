@@ -14,15 +14,17 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
+        android:paddingTop="@dimen/text_view_padding"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <TextView
         android:id="@+id/item_type_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/item_name"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:paddingBottom="@dimen/text_view_padding"
         android:ellipsize="marquee"
         android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
