@@ -1,5 +1,5 @@
 db.Store.insert({
-	_ID		:	"Store 111",
+	StoreId		:	"Store 111",
 	Name	:	"Roswell",
 	Locations	:	[
 	{

@@ -1,4 +1,4 @@
-<html>
+<html ng-app>
 <head>
 
 <link rel="stylesheet" href="css/c.css"/>
@@ -9,26 +9,54 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
+<script type="text/javascript" src="jquery/jquery-1.11.1.min.js">
+
+</script>
+
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js">
+
+</script>
+
+<style>
+      html, body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+
+      #map-canvas {
+        height: 450px;
+        width: 750px;
+      }
+
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+
+var map;
+function initialize() {
+  var mapOptions = {
+    zoom: 18, 
+    center: new google.maps.LatLng(33.9808893, -84.4350177)
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
 <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"></a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
+        <div id="navbar" >
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#mainApplication">Where to</a></li>
+            <li><a href="#ourTeam">Our Team</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -38,20 +66,33 @@
 
       <div class="center-text">
         <h1>Home Depot Code-Athalon</h1>
-        <p class="lead">Blah Blah Blah Blah</p>
+        <p class="lead">Words are sick</p>
       </div>
 
       <!-- START THE FEATURETTES -->
 
-      <hr class="featurette-divider">
+      <hr  id="mainApplication" class="featurette-divider">
 
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      <div id="teh"  class="row featurette">
+        <div class="col-md-4">
+          <h2 class="featurette-heading">Looking for a retail item?    
+            <span class="text-muted">
+              We can help
+            </span>
+          </h2>
+          <p class="lead">What country do you live in?</p>
+          <input ng-model="name" placeholder="United States of America">
+          
         </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        <div id="map-canvas"class="col-md-8">
+          <!--<iframe
+              width="800"
+              height="450"
+              frameborder="0" style="border:0"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAPvhoDgCFn4oZUvDrV4TguBBwczsPQSGo
+              &q=Atlanta+GA">
+          </iframe>
+        -->
         </div>
       </div>
 
@@ -60,7 +101,7 @@
 	  <!-- END OF FEATURETTES -->
 	  
 	   <!-- Two image heads -->
-      <div class="row">
+      <div id="ourTeam" class="row">
         <div class="col-lg-4">
           <img class="img-circle" src="WebContent/images/our-team/Vito.jpg" alt="Vito" style="width: 140px; height: 140px;">
           <h2>Vito</h2>
