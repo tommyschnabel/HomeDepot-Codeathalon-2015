@@ -17,6 +17,10 @@ public class DeleteItemFromListAsyncTask extends AsyncTask<Integer,Integer,Boole
 
     private DeleteItemCallback callback;
 
+    public DeleteItemFromListAsyncTask(DeleteItemCallback callback) {
+        this.callback = callback;
+    }
+
     @Override
     protected Boolean doInBackground(Integer... params) {
         Integer id = params[0];

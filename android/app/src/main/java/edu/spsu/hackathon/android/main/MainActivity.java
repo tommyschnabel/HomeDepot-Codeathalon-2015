@@ -20,10 +20,10 @@ import java.util.List;
 import edu.spsu.hackathon.android.R;
 import edu.spsu.hackathon.android.common.Item;
 import edu.spsu.hackathon.android.common.Point;
+import edu.spsu.hackathon.android.requests.GetItemsAsyncTask;
 import edu.spsu.hackathon.android.requests.GetItemsCallback;
+import edu.spsu.hackathon.android.requests.GetPathAsyncTask;
 import edu.spsu.hackathon.android.requests.GetPathCallback;
-import edu.spsu.hackathon.android.requests.MockGetItemsAsyncTask;
-import edu.spsu.hackathon.android.requests.MockGetPathAsyncTask;
 import edu.spsu.hackathon.android.tools.LocationViewerToolActivity;
 
 public class MainActivity extends ActionBarActivity implements GetPathCallback,
@@ -154,8 +154,8 @@ public class MainActivity extends ActionBarActivity implements GetPathCallback,
     }
 
     private void requestInfo() {
-        new MockGetItemsAsyncTask(this).execute(0); //random value since you can't have a Void generic
-        new MockGetPathAsyncTask(this).execute(getResources());
+        new GetItemsAsyncTask(this).execute(0); //random value since you can't have a Void generic
+        new GetPathAsyncTask(this).execute(0); //random value since you can't have a Void generic
     }
 
     @Override

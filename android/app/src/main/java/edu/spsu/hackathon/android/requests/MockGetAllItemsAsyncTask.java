@@ -8,6 +8,7 @@ import java.util.List;
 import edu.spsu.hackathon.android.common.Item;
 import edu.spsu.hackathon.android.common.Type;
 
+@Deprecated
 public class MockGetAllItemsAsyncTask extends AsyncTask<Integer,Integer,List<Item>> {
 
     private GetAllItemsCallback callback;

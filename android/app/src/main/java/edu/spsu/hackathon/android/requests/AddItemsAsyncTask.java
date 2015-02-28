@@ -11,15 +11,13 @@ import org.apache.http.entity.StringEntity;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
-import edu.spsu.hackathon.android.common.Item;
 import edu.spsu.hackathon.android.common.ServerUtils;
 
-public class AddItemsAsyncTask extends AsyncTask<List<Integer>,Integer,List<Item>> {
+public class AddItemsAsyncTask extends AsyncTask<Integer[],Integer,Boolean> {
 
     public interface AddItemsCallback {
-        void onAddItemsFinished(List<Item> items);
+        void onAddItemsFinished(Boolean success);
     }
 
     AddItemsCallback callback;
@@ -29,8 +27,8 @@ public class AddItemsAsyncTask extends AsyncTask<List<Integer>,Integer,List<Item
     }
 
     @Override
-    protected List<Item> doInBackground(List<Integer>... params) {
-        List<Integer> itemsToAdd = params[0];
+    protected Boolean doInBackground(Integer[]... params) {
+        Integer[] itemsToAdd = params[0];
 
         ObjectMapper mapper = ServerUtils.getObjectMapper();
         String domain = ServerUtils.getDomain() + "/home/add";
@@ -42,20 +40,21 @@ public class AddItemsAsyncTask extends AsyncTask<List<Integer>,Integer,List<Item
         } catch (UnsupportedEncodingException|JsonProcessingException e) {
             Log.e(this.getClass().toString(), "Add items task failed");
             Log.e(this.getClass().toString(), e.getMessage());
-            return null;
+            return false;
         }
 
         try {
-            return mapper.readValue(ServerUtils.makeRequestAndReadResponse(post), mapper.getTypeFactory().constructCollectionType(List.class, Item.class));
+            ServerUtils.makeRequestAndVerifyNoResponse(post);
+            return true;
         } catch (IOException e) {
             Log.e(this.getClass().toString(), "Get items task failed");
             Log.e(this.getClass().toString(), e.getMessage());
-            return null;
+            return false;
         }
     }
 
     @Override
-    protected void onPostExecute(List<Item> items) {
-        callback.onAddItemsFinished(items);
+    protected void onPostExecute(Boolean success) {
+        callback.onAddItemsFinished(success);
     }
 }

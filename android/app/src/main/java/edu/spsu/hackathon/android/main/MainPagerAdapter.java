@@ -8,17 +8,21 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import edu.spsu.hackathon.android.R;
 import edu.spsu.hackathon.android.common.Item;
 import edu.spsu.hackathon.android.common.Point;
+import edu.spsu.hackathon.android.requests.DeleteItemFromListAsyncTask;
 
-public class MainPagerAdapter extends FragmentPagerAdapter {
+public class MainPagerAdapter extends FragmentPagerAdapter implements DeleteItemFromListAsyncTask.DeleteItemCallback {
 
     private ItemListFragment itemListFragment;
     private StoreMapFragment storeMapFragment;
     private List<Item> items;
     private List<Point> path;
+    private Queue<Item> deleteQueue = new PriorityQueue<>();
 
     public MainPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -96,10 +100,10 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
                         }
                     }
                     if (itemToDelete != null) {
-                        items.remove(itemToDelete);
+                        deleteQueue.add(itemToDelete);
+                        new DeleteItemFromListAsyncTask(MainPagerAdapter.this).execute(itemToDelete.getId());
                     }
 
-                    itemListFragment.refreshListView(items);
                     return true;
                 }
                 return false;
@@ -117,6 +121,12 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
                 checkBox.setChecked(!isToggled);
             }
         };
+    }
+
+    @Override
+    public void onDeleteItemFinished(Boolean success) {
+        items.remove(deleteQueue.remove());
+        itemListFragment.refreshListView(items);
     }
 
     public class MainPagerAdapterException extends RuntimeException {

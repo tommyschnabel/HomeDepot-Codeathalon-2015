@@ -10,7 +10,6 @@ import org.apache.http.client.methods.HttpPost;
 import java.io.IOException;
 import java.util.List;
 
-import edu.spsu.hackathon.android.common.Item;
 import edu.spsu.hackathon.android.common.Point;
 import edu.spsu.hackathon.android.common.ServerUtils;
 

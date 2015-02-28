@@ -24,11 +24,11 @@ import java.util.Set;
 
 import edu.spsu.hackathon.android.R;
 import edu.spsu.hackathon.android.common.Item;
+import edu.spsu.hackathon.android.requests.AddItemsAsyncTask;
 import edu.spsu.hackathon.android.requests.GetAllItemsAsyncTask;
 import edu.spsu.hackathon.android.requests.GetAllItemsCallback;
-import edu.spsu.hackathon.android.requests.MockGetAllItemsAsyncTask;
 
-public class AddItemsActivity extends ActionBarActivity implements GetAllItemsCallback {
+public class AddItemsActivity extends ActionBarActivity implements GetAllItemsCallback, AddItemsAsyncTask.AddItemsCallback {
 
     public static String ITEMS = "items";
     public static Integer ACTION_ADDED_ITEMS = 1;
@@ -38,17 +38,23 @@ public class AddItemsActivity extends ActionBarActivity implements GetAllItemsCa
     List<Item> currentlyAddedItems;
     List<Item> items;
     Set<Integer> checkedItems = new HashSet<>();
+    List<Item> newItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new MockGetAllItemsAsyncTask(this).execute();
+        new GetAllItemsAsyncTask(this).execute();
 
         setContentView(R.layout.activity_add_items);
         itemListFragment = (ItemListFragment) getSupportFragmentManager().findFragmentByTag(getString(R.string.add_items_fragment_tag));
 
         String currentItemsString = getIntent().getStringExtra(ITEMS);
+
+        if (currentItemsString == null) {
+            currentlyAddedItems = new ArrayList<>();
+        }
+
         ObjectMapper mapper = new ObjectMapper();
         try {
             currentlyAddedItems = mapper.readValue(currentItemsString, mapper.getTypeFactory().constructCollectionType(List.class, Item.class));
@@ -72,36 +78,16 @@ public class AddItemsActivity extends ActionBarActivity implements GetAllItemsCa
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch(item.getItemId()) {
+        switch(id) {
         case R.id.action_confirm_add_items:
-            ObjectMapper mapper = new ObjectMapper();
-            List<Item> newItems = new ArrayList<>();
+            newItems = new ArrayList<>();
             for (Item obj : items) {
                 if (checkedItems.contains(obj.getId())) {
                     newItems.add(obj);
                 }
             }
 
-            for (Item i : newItems) {
-                currentlyAddedItems.add(i);
-            }
-
-            String newItemsString = "";
-
-            try {
-                 newItemsString = mapper.writeValueAsString(currentlyAddedItems);
-            } catch (JsonProcessingException e) {
-                Log.e(this.getClass().toString(), "Couldn't serialize new items");
-                Log.e(this.getClass().toString(), e.getMessage());
-                Toast.makeText(this, getString(R.string.add_failed), Toast.LENGTH_LONG).show();
-            }
-            Intent intent = new Intent();
-            intent.putExtra(ITEMS, newItemsString);
-            setResult(ACTION_ADDED_ITEMS, intent);
-
-            //TODO add network call to update list
-
-            finish();
+            new AddItemsAsyncTask(this).execute((Integer[])checkedItems.toArray());
 
             case R.id.action_cancel_add_items:
             setResult(ACTION_NOTHING_HAPPENED);
@@ -168,5 +154,28 @@ public class AddItemsActivity extends ActionBarActivity implements GetAllItemsCa
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onAddItemsFinished(Boolean success) {
+        for (Item i : newItems) {
+            currentlyAddedItems.add(i);
+        }
+
+        String newItemsString = "";
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            newItemsString = mapper.writeValueAsString(currentlyAddedItems);
+        } catch (JsonProcessingException e) {
+            Log.e(this.getClass().toString(), "Couldn't serialize new items");
+            Log.e(this.getClass().toString(), e.getMessage());
+            Toast.makeText(this, getString(R.string.add_failed), Toast.LENGTH_LONG).show();
+        }
+        Intent intent = new Intent();
+        intent.putExtra(ITEMS, newItemsString);
+        setResult(ACTION_ADDED_ITEMS, intent);
+
+        finish();
     }
 }
