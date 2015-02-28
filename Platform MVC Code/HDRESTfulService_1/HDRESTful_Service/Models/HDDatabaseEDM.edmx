@@ -4,22 +4,205 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HDDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="HDDatabaseModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="HDDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="itemID" />
+          </Key>
+          <Property Name="itemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="itemName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type_typeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Types">
+          <Key>
+            <PropertyRef Name="typeID" />
+          </Key>
+          <Property Name="typeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Lat" Type="float" Nullable="false" />
+          <Property Name="Lng" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TypesItems">
+          <End Role="Types" Type="Self.Types" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="typeID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="Type_typeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="BuildBestFitItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BuildViewItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FindItemInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FindTypeInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TypeID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="HDDatabaseModelStoreContainer">
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TypesItems" Association="Self.FK_TypesItems">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HDDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="HDDatabaseEntitiesAzure" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="HDDatabaseEntitiesAzure" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Types" EntityType="HDDatabaseModel.Types" />
+          <EntitySet Name="Items" EntityType="HDDatabaseModel.Items" />
+          <AssociationSet Name="TypesItems" Association="HDDatabaseModel.TypesItems">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <FunctionImport Name="BuildBestFitItem" ReturnType="Collection(HDDatabaseModel.BuildBestFitItem)">
+            <Parameter Name="ItemID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BuildViewItem" ReturnType="Collection(HDDatabaseModel.BuildViewItem)">
+            <Parameter Name="ItemID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FindItemInformation" ReturnType="Collection(HDDatabaseModel.FindItemInformation_Result)">
+            <Parameter Name="ItemID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FindTypeInformation" ReturnType="Collection(HDDatabaseModel.FindTypeInformation_Result)">
+            <Parameter Name="TypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Types">
+          <Key>
+            <PropertyRef Name="typeID" />
+          </Key>
+          <Property Name="typeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Items" Relationship="HDDatabaseModel.TypesItems" FromRole="Types" ToRole="Items" />
+          <Property Name="typeName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Lat" Type="Double" Nullable="false" />
+          <Property Name="Lng" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="itemID" />
+          </Key>
+          <Property Name="itemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Type" Relationship="HDDatabaseModel.TypesItems" FromRole="Items" ToRole="Types" />
+          <Property Name="typeID" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="itemName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <Association Name="TypesItems">
+          <End Type="HDDatabaseModel.Types" Role="Types" Multiplicity="1" />
+          <End Type="HDDatabaseModel.Items" Role="Items" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="BuildBestFitItem">
+          <Property Type="Int32" Name="itemID" Nullable="false" />
+          <Property Type="String" Name="typeID" Nullable="false" />
+          <Property Type="String" Name="itemName" Nullable="false" />
+          <Property Type="String" Name="typeName" Nullable="true" />
+          <Property Type="Double" Name="Lat" Nullable="true" />
+          <Property Type="Double" Name="Lng" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="BuildViewItem">
+          <Property Type="Int32" Name="itemID" Nullable="false" />
+          <Property Type="String" Name="typeID" Nullable="false" />
+          <Property Type="String" Name="itemName" Nullable="false" />
+          <Property Type="String" Name="typeName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="FindItemInformation_Result">
+          <Property Type="Int32" Name="itemID" Nullable="false" />
+          <Property Type="String" Name="itemName" Nullable="false" />
+          <Property Type="String" Name="typeID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="FindTypeInformation_Result">
+          <Property Type="Int32" Name="typeID" Nullable="false" />
+          <Property Type="String" Name="typeName" Nullable="false" />
+          <Property Type="Double" Name="Lat" Nullable="false" />
+          <Property Type="Double" Name="Lng" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HDDatabaseModelStoreContainer" CdmEntityContainer="HDDatabaseEntitiesAzure" />
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HDDatabaseModelStoreContainer" CdmEntityContainer="HDDatabaseEntitiesAzure">
+    <EntitySetMapping Name="Types">
+      <EntityTypeMapping TypeName="IsTypeOf(HDDatabaseModel.Types)">
+        <MappingFragment StoreEntitySet="Types">
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="IsTypeOf(HDDatabaseModel.Items)">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TypesItems" TypeName="HDDatabaseModel.TypesItems" StoreEntitySet="Items">
+      <EndProperty Name="Types">
+        <ScalarProperty Name="typeID" ColumnName="Type_typeID" />
+      </EndProperty>
+      <EndProperty Name="Items">
+        <ScalarProperty Name="itemID" ColumnName="itemID" />
+      </EndProperty>
+    </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="BuildBestFitItem" FunctionName="HDDatabaseModel.Store.BuildBestFitItem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HDDatabaseModel.BuildBestFitItem">
+                <ScalarProperty Name="itemID" ColumnName="itemID" />
+                <ScalarProperty Name="typeID" ColumnName="typeID" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="typeName" ColumnName="typeName" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuildViewItem" FunctionName="HDDatabaseModel.Store.BuildViewItem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HDDatabaseModel.BuildViewItem">
+                <ScalarProperty Name="itemID" ColumnName="itemID" />
+                <ScalarProperty Name="typeID" ColumnName="typeID" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="typeName" ColumnName="typeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FindItemInformation" FunctionName="HDDatabaseModel.Store.FindItemInformation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HDDatabaseModel.FindItemInformation_Result">
+                <ScalarProperty Name="itemID" ColumnName="itemID" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="typeID" ColumnName="typeID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FindTypeInformation" FunctionName="HDDatabaseModel.Store.FindTypeInformation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HDDatabaseModel.FindTypeInformation_Result">
+                <ScalarProperty Name="typeID" ColumnName="typeID" />
+                <ScalarProperty Name="typeName" ColumnName="typeName" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -33,7 +216,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

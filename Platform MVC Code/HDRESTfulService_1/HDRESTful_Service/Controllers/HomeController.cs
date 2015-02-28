@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HDRESTful_Service.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -42,6 +43,11 @@ namespace HDRESTful_Service.Controllers
         public JsonResult mRetrieveMapDetails()
         {
 
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult mSubmitItemSelection(List<BuildViewItem> viewItem)
+        {
+            viewItem = new List<BuildView
             return Json(0, JsonRequestBehavior.AllowGet);
         }
     }

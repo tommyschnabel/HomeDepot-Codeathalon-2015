@@ -167,6 +167,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BuildBestFitItem.cs">
+      <DependentUpon>HDDatabaseEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BuildViewItem.cs">
+      <DependentUpon>HDDatabaseEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FindItemInformation_Result.cs">
+      <DependentUpon>HDDatabaseEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FindTypeInformation_Result.cs">
+      <DependentUpon>HDDatabaseEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HDDatabaseEDM.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -183,7 +195,14 @@
       <DependentUpon>HDDatabaseEDM.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Items.cs">
+      <DependentUpon>HDDatabaseEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MobileViewModel.cs" />
+    <Compile Include="Models\Types.cs">
+      <DependentUpon>HDDatabaseEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -194,6 +213,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\HDDatabaseEDM.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\HDDatabaseEDM.edmx">

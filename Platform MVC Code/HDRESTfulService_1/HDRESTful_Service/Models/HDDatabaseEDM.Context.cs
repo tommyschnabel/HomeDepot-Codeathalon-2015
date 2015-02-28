@@ -12,6 +12,8 @@ namespace HDRESTful_Service.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class HDDatabaseEntitiesAzure : DbContext
     {
@@ -25,5 +27,43 @@ namespace HDRESTful_Service.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Types> Types { get; set; }
+        public virtual DbSet<Items> Items { get; set; }
+    
+        public virtual ObjectResult<BuildBestFitItem> BuildBestFitItem(Nullable<int> itemID)
+        {
+            var itemIDParameter = itemID.HasValue ?
+                new ObjectParameter("ItemID", itemID) :
+                new ObjectParameter("ItemID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BuildBestFitItem>("BuildBestFitItem", itemIDParameter);
+        }
+    
+        public virtual ObjectResult<BuildViewItem> BuildViewItem(Nullable<int> itemID)
+        {
+            var itemIDParameter = itemID.HasValue ?
+                new ObjectParameter("ItemID", itemID) :
+                new ObjectParameter("ItemID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BuildViewItem>("BuildViewItem", itemIDParameter);
+        }
+    
+        public virtual ObjectResult<FindItemInformation_Result> FindItemInformation(Nullable<int> itemID)
+        {
+            var itemIDParameter = itemID.HasValue ?
+                new ObjectParameter("ItemID", itemID) :
+                new ObjectParameter("ItemID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindItemInformation_Result>("FindItemInformation", itemIDParameter);
+        }
+    
+        public virtual ObjectResult<FindTypeInformation_Result> FindTypeInformation(Nullable<int> typeID)
+        {
+            var typeIDParameter = typeID.HasValue ?
+                new ObjectParameter("TypeID", typeID) :
+                new ObjectParameter("TypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindTypeInformation_Result>("FindTypeInformation", typeIDParameter);
+        }
     }
 }

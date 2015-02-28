@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HDDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HDDatabaseEntitiesAzure" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Types" EntityType="HDDatabaseModel.Types" />
+    <EntitySet Name="Items" EntityType="HDDatabaseModel.Items" />
+    <AssociationSet Name="TypesItems" Association="HDDatabaseModel.TypesItems">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="Items" EntitySet="Items" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Types">
+    <Key>
+      <PropertyRef Name="typeID" />
+    </Key>
+    <Property Name="typeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Items" Relationship="HDDatabaseModel.TypesItems" FromRole="Types" ToRole="Items" />
+    <Property Name="typeName" Type="String" Nullable="false" />
+    <Property Name="Lat" Type="Double" Nullable="false" />
+    <Property Name="Lng" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Items">
+    <Key>
+      <PropertyRef Name="itemID" />
+    </Key>
+    <Property Name="itemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Type" Relationship="HDDatabaseModel.TypesItems" FromRole="Items" ToRole="Types" />
+    <Property Name="typeID" Type="String" Nullable="false" />
+    <Property Name="itemName" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="TypesItems">
+    <End Type="HDDatabaseModel.Types" Role="Types" Multiplicity="1" />
+    <End Type="HDDatabaseModel.Items" Role="Items" Multiplicity="*" />
+  </Association>
+</Schema>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HDDatabaseModelStoreContainer" CdmEntityContainer="HDDatabaseEntitiesAzure">
+    <EntitySetMapping Name="Types">
+      <EntityTypeMapping TypeName="IsTypeOf(HDDatabaseModel.Types)">
+        <MappingFragment StoreEntitySet="Types">
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="IsTypeOf(HDDatabaseModel.Items)">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TypesItems" TypeName="HDDatabaseModel.TypesItems" StoreEntitySet="Items">
+      <EndProperty Name="Types">
+        <ScalarProperty Name="typeID" ColumnName="Type_typeID" />
+      </EndProperty>
+      <EndProperty Name="Items">
+        <ScalarProperty Name="itemID" ColumnName="itemID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
