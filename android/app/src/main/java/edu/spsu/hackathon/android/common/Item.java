@@ -1,6 +1,8 @@
 package edu.spsu.hackathon.android.common;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
 
     Integer id;
     String name;

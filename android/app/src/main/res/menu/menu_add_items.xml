@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="edu.spsu.hackathon.android.main.AddItemsActivity">
+
+
+    <item
+        android:id="@+id/action_confirm_add_items"
+        android:title="@string/action_accept"
+        app:showAsAction="ifRoom"
+        android:icon="@mipmap/ic_action_accept"/>
+
+    <item
+        android:id="@+id/action_cancel_add_items"
+        android:title="@string/action_cancel"
+        app:showAsAction="ifRoom"
+        android:icon="@mipmap/ic_action_cancel"/>
+</menu>

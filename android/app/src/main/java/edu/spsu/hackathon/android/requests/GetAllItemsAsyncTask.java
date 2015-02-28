@@ -15,10 +15,6 @@ import edu.spsu.hackathon.android.common.ServerUtils;
 
 public class GetAllItemsAsyncTask extends AsyncTask<Integer,Integer,List<Item>> {
 
-    public interface GetAllItemsCallback {
-        void onGetAllItemsFinished(List<Item> allItems);
-    }
-
     private GetAllItemsCallback callback;
 
     public GetAllItemsAsyncTask(GetAllItemsCallback callback) {

@@ -3,11 +3,13 @@ package edu.spsu.hackathon.android.main;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
-import com.google.android.gms.maps.SupportMapFragment;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
 
 import java.util.List;
 
+import edu.spsu.hackathon.android.R;
 import edu.spsu.hackathon.android.common.Item;
 import edu.spsu.hackathon.android.common.Point;
 
@@ -35,13 +37,13 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
             itemListFragment = new ItemListFragment();
 
             if (items != null) {
-                itemListFragment.setItems(items);
+                itemListFragment.setItems(items, getOnItemClickListener());
             }
 
             return itemListFragment;
         case 1:
             storeMapFragment = new StoreMapFragment();
-            
+
             if (path != null) {
                 storeMapFragment.setPath(path);
             }
@@ -54,7 +56,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
     public void setItems(List<Item> items) {
         if (itemListFragment != null) {
-            itemListFragment.setItems(items);
+            itemListFragment.setItems(items, getOnItemClickListener());
         }
 
         this.items = items;
@@ -66,5 +68,16 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         }
 
         this.path = path;
+    }
+
+    private AdapterView.OnItemClickListener getOnItemClickListener() {
+        return  new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CheckBox checkBox = (CheckBox) view.findViewById(R.id.item_checkbox);
+                Boolean isToggled = checkBox.isChecked();
+                checkBox.setChecked(!isToggled);
+            }
+        };
     }
 }

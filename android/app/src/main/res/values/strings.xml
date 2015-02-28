@@ -7,8 +7,18 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="action_location_tool">Location Tool</string>
     <string name="action_to_test_map_fragment">Test Map Fragment</string>
+    <string name="action_add_items">Add Items</string>
+    <string name="action_accept">Accept</string>
+    <string name="action_cancel">Cancel</string>
+
+    <!--Fragment tags-->
+    <string name="add_items_fragment_tag">Add Items Fragment</string>
 
     <!--Alerts-->
     <string name="alert_no_settings">Not enough features for settings, yet</string>
     <string name="title_activity_map_fragment_test">MapFragmentTestActivity</string>
+    <string name="title_activity_add_items">AddItemsActivity</string>
+    <string name="add_failed">Couldn\'t add new items</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

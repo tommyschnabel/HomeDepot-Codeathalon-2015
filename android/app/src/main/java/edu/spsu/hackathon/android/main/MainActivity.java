@@ -5,10 +5,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.spsu.hackathon.android.R;
@@ -67,9 +73,48 @@ public class MainActivity extends ActionBarActivity implements GetPathCallback,
         case R.id.action_location_tool:
             intent = new Intent(MainActivity.this, LocationViewerToolActivity.class);
             startActivity(intent);
-            return true;        }
+            return true;
+        case R.id.action_add_items:
+            intent = new Intent(MainActivity.this, AddItemsActivity.class);
+            ObjectMapper mapper = new ObjectMapper();
+
+
+            //Pass the current items to add activity so we can filter them out of the potentials
+            String itemsString ="";
+            if (items != null && !items.isEmpty()) {
+
+                try {
+                    itemsString = mapper.writeValueAsString(items);
+                } catch (JsonProcessingException e) {
+                    Log.e(this.getClass().toString(), "Couldn't serialize items string");
+                    Log.e(this.getClass().toString(), e.getMessage());
+                    return false;
+                }
+                intent.putExtra(AddItemsActivity.ITEMS, itemsString);
+            }
+
+            startActivityForResult(intent, AddItemsActivity.ACTION_ADDED_ITEMS);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == AddItemsActivity.ACTION_ADDED_ITEMS) {
+
+            List<Item> newItemsList = new ArrayList<>();
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                newItemsList = mapper.readValue(data.getStringExtra(AddItemsActivity.ITEMS), mapper.getTypeFactory().constructCollectionType(List.class, Item.class));
+            } catch (IOException e) {
+                Log.e(this.getClass().toString(), "Couldn't deserialize currently added items");
+                Log.e(this.getClass().toString(), e.getMessage());
+            }
+
+            onGetItemsFinished(newItemsList);
+        }
     }
 
     private void setupPage() {
@@ -111,6 +156,7 @@ public class MainActivity extends ActionBarActivity implements GetPathCallback,
 
     @Override
     public void onGetItemsFinished(List<Item> items) {
+        this.items = items;
         pagerAdapter.setItems(items);
     }
 
