@@ -27,6 +27,7 @@ import edu.spsu.hackathon.android.common.Item;
 import edu.spsu.hackathon.android.requests.AddItemsAsyncTask;
 import edu.spsu.hackathon.android.requests.GetAllItemsAsyncTask;
 import edu.spsu.hackathon.android.requests.GetAllItemsCallback;
+import edu.spsu.hackathon.android.requests.MockGetAllItemsAsyncTask;
 
 public class AddItemsActivity extends ActionBarActivity implements GetAllItemsCallback, AddItemsAsyncTask.AddItemsCallback {
 
@@ -45,6 +46,8 @@ public class AddItemsActivity extends ActionBarActivity implements GetAllItemsCa
         super.onCreate(savedInstanceState);
 
         new GetAllItemsAsyncTask(this).execute();
+        //MOCK
+//        new MockGetAllItemsAsyncTask(this).execute();
 
         setContentView(R.layout.activity_add_items);
         itemListFragment = (ItemListFragment) getSupportFragmentManager().findFragmentByTag(getString(R.string.add_items_fragment_tag));
@@ -88,6 +91,9 @@ public class AddItemsActivity extends ActionBarActivity implements GetAllItemsCa
             }
 
             new AddItemsAsyncTask(this).execute((Integer[])checkedItems.toArray());
+            //MOCK
+            //onAddItemsFinished(true);
+
 
             case R.id.action_cancel_add_items:
             setResult(ACTION_NOTHING_HAPPENED);

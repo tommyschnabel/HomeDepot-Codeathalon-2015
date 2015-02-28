@@ -101,6 +101,8 @@ public class MainPagerAdapter extends FragmentPagerAdapter implements DeleteItem
                     }
                     if (itemToDelete != null) {
                         deleteQueue.add(itemToDelete);
+                        //MOCK
+                        //onDeleteItemFinished(true);
                         new DeleteItemFromListAsyncTask(MainPagerAdapter.this).execute(itemToDelete.getId());
                     }
 
