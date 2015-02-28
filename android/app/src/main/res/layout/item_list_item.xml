@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/text_view_padding"
+    android:paddingRight="@dimen/text_view_padding"
+    android:minHeight="?android:attr/listPreferredItemHeight">
 
     <TextView
         android:id="@+id/item_name"
@@ -9,13 +14,26 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <TextView
+        android:id="@+id/item_type_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_name"
+        android:layout_alignParentLeft="true"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <CheckBox
         android:id="@+id/item_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"/>
 
@@ -23,6 +41,7 @@
         android:id="@+id/item_list_loading_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminate="true"/>
+        android:indeterminate="true"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

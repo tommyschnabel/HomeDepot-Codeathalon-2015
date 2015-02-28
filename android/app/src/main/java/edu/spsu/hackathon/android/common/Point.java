@@ -8,8 +8,8 @@ public class Point {
     Double lat;
     Double lng;
     Type type;
-    List<Integer> itemIds;
-    String connectedTo;
+//    List<Integer> itemIds;
+    List<Integer> connectedTo;
 
     public Integer getId() {
         return id;
@@ -43,19 +43,19 @@ public class Point {
         this.type = type;
     }
 
-    public List<Integer> getItemIds() {
-        return itemIds;
-    }
+//    public List<Integer> getItemIds() {
+//        return itemIds;
+//    }
+//
+//    public void setItemIds(List<Integer> itemIds) {
+//        this.itemIds = itemIds;
+//    }
 
-    public void setItemIds(List<Integer> itemIds) {
-        this.itemIds = itemIds;
-    }
-
-    public String getConnectedTo() {
+    public List<Integer> getConnectedTo() {
         return connectedTo;
     }
 
-    public void setConnectedTo(String connectedTo) {
+    public void setConnectedTo(List<Integer> connectedTo) {
         this.connectedTo = connectedTo;
     }
 }

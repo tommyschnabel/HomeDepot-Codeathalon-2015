@@ -98,7 +98,6 @@ public class MainActivity extends ActionBarActivity implements GetPathCallback,
             }
         });
 
-
         MainTabListener tabListener = new MainTabListener(viewPager);
         actionBar.removeAllTabs();
         actionBar.addTab(actionBar.newTab().setIcon(R.mipmap.ic_action_view_as_list).setTabListener(tabListener));
@@ -112,12 +111,12 @@ public class MainActivity extends ActionBarActivity implements GetPathCallback,
 
     @Override
     public void onGetItemsFinished(List<Item> items) {
-
+        pagerAdapter.setItems(items);
     }
 
     @Override
     public void onGetPathFinished(List<Point> path) {
-
+        pagerAdapter.setPath(path);
     }
 
 }

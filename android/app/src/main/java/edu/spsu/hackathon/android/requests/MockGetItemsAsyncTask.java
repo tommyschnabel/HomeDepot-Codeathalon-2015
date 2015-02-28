@@ -23,27 +23,31 @@ public class MockGetItemsAsyncTask extends AsyncTask<Integer,Integer,List<Item>>
 
         item.setId(1);
         item.setName("Hammer");
-        item.setType(Type.TOOLS);
+        item.setType(Type.tools);
         items.add(item);
 
+        item = new Item();
         item.setId(2);
         item.setName("Nails");
-        item.setType(Type.TOOLS);
+        item.setType(Type.tools);
         items.add(item);
 
+        item = new Item();
         item.setId(3);
         item.setName("Paint");
-        item.setType(Type.PAINT);
+        item.setType(Type.paint);
         items.add(item);
 
+        item = new Item();
         item.setId(23);
         item.setName("Paint Roller");
-        item.setType(Type.PAINT);
+        item.setType(Type.paint);
         items.add(item);
 
+        item = new Item();
         item.setId(13);
         item.setName("Window Pane");
-        item.setType(Type.DOORS);
+        item.setType(Type.doors);
         items.add(item);
 
         return items;

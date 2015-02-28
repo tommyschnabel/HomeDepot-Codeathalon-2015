@@ -15,6 +15,8 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
     ItemListFragment itemListFragment;
     StoreMapFragment storeMapFragment;
+    List<Item> items;
+    List<Point> path;
 
     public MainPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -31,9 +33,19 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
         case 0:
             itemListFragment = new ItemListFragment();
+
+            if (items != null) {
+                itemListFragment.setItems(items);
+            }
+
             return itemListFragment;
         case 1:
             storeMapFragment = new StoreMapFragment();
+            
+            if (path != null) {
+                storeMapFragment.setPath(path);
+            }
+
             return storeMapFragment;
         default:
             throw new RuntimeException("Get count method isn't up to date with actual number of tabs");
@@ -41,11 +53,18 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     }
 
     public void setItems(List<Item> items) {
-        itemListFragment.setItems(items);
-        storeMapFragment.setItems(items);
+        if (itemListFragment != null) {
+            itemListFragment.setItems(items);
+        }
+
+        this.items = items;
     }
 
     public void setPath(List<Point> path) {
-        storeMapFragment.setPath(path);
+        if (storeMapFragment != null) {
+            storeMapFragment.setPath(path);
+        }
+
+        this.path = path;
     }
 }

@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/hd_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <meta-data
@@ -23,7 +23,7 @@
 
         <activity
             android:name=".tools.LocationViewerToolActivity"
-            android:label="@string/app_name" >
+            android:label="@string/action_location_tool" >
         </activity>
         <activity
             android:name=".main.MainActivity"
@@ -33,10 +33,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".tools.MapFragmentTestActivity"
-            android:label="@string/title_activity_map_fragment_test" >
         </activity>
     </application>
 
