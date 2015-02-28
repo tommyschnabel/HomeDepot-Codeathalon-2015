@@ -1,8 +1,9 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <!-- Customize your theme here. -->
+        <item name="android:colorAccent">@color/home_depot_orange</item>
+        <!--<item name="android:colorPrimaryDark">@color/home_depot_orange_deep</item>-->
     </style>
 
 </resources>

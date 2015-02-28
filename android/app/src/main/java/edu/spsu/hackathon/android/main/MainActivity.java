@@ -45,15 +45,16 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
 
         switch(item.getItemId()) {
         case R.id.action_settings:
             Toast.makeText(this, R.string.alert_no_settings, Toast.LENGTH_LONG).show();
-            break;
+            return true;
         case R.id.action_location_tool:
-            Intent intent = new Intent(MainActivity.this, LocationViewerToolActivity.class);
+            intent = new Intent(MainActivity.this, LocationViewerToolActivity.class);
             startActivity(intent);
-        }
+            return true;        }
 
         return super.onOptionsItemSelected(item);
     }

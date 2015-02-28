@@ -1,15 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="edu.spsu.hackathon.android.main.MainActivity">
+    tools:context="edu.spsu.hackathon.android.tools.MapFragmentTestActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_location_tool"
-        android:title="@string/action_location_tool"/>
-
-    <item
-        android:id="@+id/action_test_map_fragment"
-        android:title="@string/action_to_test_map_fragment"/>
 </menu>

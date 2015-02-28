@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">HomeDepotCodeathalon</string>
 
-    <string name="hello_world">Hello world!</string>
+
+    <!--Titles-->
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
-
     <string name="action_location_tool">Location Tool</string>
+    <string name="action_to_test_map_fragment">Test Map Fragment</string>
 
     <!--Alerts-->
     <string name="alert_no_settings">Not enough features for settings, yet</string>
+    <string name="title_activity_map_fragment_test">MapFragmentTestActivity</string>
 </resources>
