@@ -20,7 +20,7 @@ public class DeleteItemFromListAsyncTask extends AsyncTask<Integer,Integer,Boole
     @Override
     protected Boolean doInBackground(Integer... params) {
         Integer id = params[0];
-        String domain = ServerUtils.getDomain() + "/home/delete?id=" + id;
+        String domain = ServerUtils.getDomain() + "/home/delete?ID=" + id;
         HttpPost post = new HttpPost(domain);
 
         try {

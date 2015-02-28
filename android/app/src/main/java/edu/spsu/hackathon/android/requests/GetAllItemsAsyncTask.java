@@ -28,7 +28,10 @@ public class GetAllItemsAsyncTask extends AsyncTask<Integer,Integer,List<Item>> 
         HttpPost post = new HttpPost(domain);
 
         try {
-            return mapper.readValue(ServerUtils.makeRequestAndReadResponse(post), mapper.getTypeFactory().constructCollectionType(List.class, Item.class));
+            List<ServerItemAndPointMapper.ServerItem> allServerItems = mapper.readValue(ServerUtils.makeRequestAndReadResponse(post),
+                    mapper.getTypeFactory().constructCollectionType(List.class, ServerItemAndPointMapper.ServerItem.class));
+
+            return ServerItemAndPointMapper.convertServerItemToItem(allServerItems);
         } catch (IOException e) {
             Log.e(this.getClass().toString(), "Get all items task failed");
             Log.e(this.getClass().toString(), e.getMessage());

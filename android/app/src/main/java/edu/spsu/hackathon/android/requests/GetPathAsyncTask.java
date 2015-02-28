@@ -29,7 +29,10 @@ public class GetPathAsyncTask extends AsyncTask<Integer,Integer,List<Point>> {
         HttpPost post = new HttpPost(domain);
 
         try {
-            return mapper.readValue(ServerUtils.makeRequestAndReadResponse(post), mapper.getTypeFactory().constructCollectionType(List.class, Point.class));
+            List<ServerItemAndPointMapper.ServerPoint> path = mapper.readValue(ServerUtils.makeRequestAndReadResponse(post),
+                    mapper.getTypeFactory().constructCollectionType(List.class, ServerItemAndPointMapper.ServerPoint.class));
+
+            return ServerItemAndPointMapper.convertServerPointToPoint(path);
         } catch (IOException e) {
             Log.e(this.getClass().toString(), "Get path task failed");
             Log.e(this.getClass().toString(), e.getMessage());

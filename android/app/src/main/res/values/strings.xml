@@ -10,6 +10,7 @@
     <string name="action_add_items">Add Items</string>
     <string name="action_accept">Accept</string>
     <string name="action_cancel">Cancel</string>
+    <string name="action_refresh">Refresh</string>
 
     <!--Fragment tags-->
     <string name="add_items_fragment_tag">Add Items Fragment</string>

@@ -13,6 +13,9 @@ import java.util.List;
 import edu.spsu.hackathon.android.R;
 import edu.spsu.hackathon.android.common.Point;
 
+/**
+ * This will break at runtime because of the unique ID that never gets used here, but I thought was needed
+ */
 @Deprecated
 public class MockGetPathAsyncTask extends AsyncTask<Resources, Integer,List<Point>> {
 

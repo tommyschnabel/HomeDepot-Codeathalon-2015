@@ -9,6 +9,12 @@
         app:showAsAction="ifRoom"
         android:icon="@mipmap/ic_action_new"/>
 
+    <item
+        android:id="@+id/action_refresh"
+        android:title="@string/action_refresh"
+        app:showAsAction="ifRoom"
+        android:icon="@mipmap/ic_action_refresh"/>
+
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 

@@ -39,7 +39,7 @@ public class ItemArrayAdapter extends ArrayAdapter<Item> {
         itemText.setText(item.getName());
 
         TextView itemTypeText = (TextView) convertView.findViewById(R.id.item_type_text);
-        itemTypeText.setText(item.getType().toString());
+        itemTypeText.setText(item.getType().toString().toUpperCase());
 
         return convertView;
     }

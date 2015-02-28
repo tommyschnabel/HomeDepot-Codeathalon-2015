@@ -95,6 +95,10 @@ public class MainActivity extends ActionBarActivity implements GetPathCallback,
 
             startActivityForResult(intent, AddItemsActivity.ACTION_ADDED_ITEMS);
             return true;
+        case R.id.action_refresh:
+            setupPage();
+            requestInfo();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
