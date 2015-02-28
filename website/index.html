@@ -1,4 +1,4 @@
-<html ng-app>
+<html>
 <head>
 
 <link rel="stylesheet" href="css/c.css"/>
@@ -9,6 +9,8 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
+<link href="http://code.jboxcdn.com/0.3.2/jBox.css" rel="stylesheet">
+
 <script type="text/javascript" src="jquery/jquery-1.11.1.min.js">
 
 </script>
@@ -17,6 +19,9 @@
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js">
 
 </script>
+
+<script src="http://code.jboxcdn.com/0.3.2/jBox.min.js"></script>
+
 
 <style>
       html, body {
@@ -39,7 +44,7 @@
 
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <script>
+    <script type="text/javascript">
 
 var map;
 function initialize() {
@@ -53,6 +58,33 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
+  function checkZip() {
+    console.log($("#zipInput").val());
+    if ($("#zipInput").val() == 30062) {
+        document.getElementById("result").style.visibility = "visible";
+    } else {
+        document.getElementById("result").style.visibility = "hidden";
+    }
+  }
+
+  function onHdClick(){
+    document.getElementById("result2").style.visibility = "visible";
+  }
+
+
+
+$('.tooltip').jBox('Tooltip', {
+    target: $('#myModal'),
+    position: {
+        x: 'right',
+        y: 'top'
+    },
+    outside: 'x'
+});
+
+$(".item").click(function () {
+      $(this).parent().remove();
+    });
     </script>
 
 <body>
@@ -63,7 +95,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#mainApplication">Where to</a></li>
-            <li><a href="#ourTeam">Our Team</a></li>
+            <li><a  href="#ourTeam">Our Team</a></li>
+            <li><a style="margin-left:750px" id="myModal">Cart</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -73,50 +106,195 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
       <div class="center-text">
         <h1>Home Depot Code-Athalon</h1>
-        <p class="lead">Words are sick</p>
+        <p class="lead"></p>
       </div>
 
       <!-- START THE FEATURETTES -->
+            <hr  class="featurette-divider">
 
-      <hr  id="mainApplication" class="featurette-divider">
-
-      <div id="teh"  class="row featurette">
-        <div class="col-md-4">
+      <div class="row featurette">
+        <div class="col-md-6">
           <h2 class="featurette-heading">Looking for a retail item?    
             <span class="text-muted">
               We can help
             </span>
           </h2>
           <p class="lead">What zip code are you shopping in?</p>
-          <input ng-model="store" placeholder="Hopefully 30062...">
+          <input id="zipInput" onkeydown="checkZip()" placeholder="Hopefully 30062..."></input>
           <br/><br/>
           <p class="lead">Please select a local retail store</p>
 
           <div style="width: 100%; height: 250px; overflow-y: scroll;" class="scrollable">
-            <ul>
-                <li>
-                  
+            <table class="table table-striped">
+                <li id="result" style="visibility:hidden">
                   <h4>
-                  <a>The Home Depot</a>
+                  <a onclick="onHdClick()">The Home Depot</a>
                   </h4>
-
                   <h5>
-                  City: {{store.name}} Store id: {{store.storeId}}
+                  Store id: Store 111
                   </h5>
                 </li>
-            </ul>
+            </table>
           </div>
           
         </div>
+        <div class="col-md-6">
+          <h2 class="featurette-heading">Select items from the list of below...    
+            </br>
+            <span class="text-muted">
+              And we'll help you find them
+            </span>
+            <div style="width: 250px; height: 400px; overflow-y: scroll;" class="scrollable">
+            <table style="width 250px" class="table table-striped">
+                <tr>
+                  <h5>
+                  <a>frontDoor</a>
+                  </h5>
+                </a>
+                </tr>
+                <tr>
+                  <h5>
+                  <a>closetDoor</a>
+                </h5>
+                </tr>
+                                <tr>
+                  <h5>
+                  <a>frenchDoor</a>
+                </h5>
+                </tr>
+                                <tr>
+                  <h5>
+                  <a>lightbulb</a>
+                </h5>
+                </tr>
+                                <tr>
+                  <h5>
+                  <a>wallSocket</a>
+                </h5>
+                </tr>
+                                <tr>
+                  <h5>
+                  <a>electricalTape</a>
+                </h5>
+                </tr>
+                                <tr>
+                  <h5>
+                  <a>tile</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>grout</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>carpet</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>sod</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>fertilizer</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>gnome</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>fertilizer</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>deckingLumber</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>framingLumber</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>stud</a>
+                </h5>
+                </tr>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>paintRoller</a>
+                </h5>
+                </tr>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>paintCan</a>
+                </h5>
+                </tr>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>paintRemover</a>
+                </h5>
+                </tr>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>drill</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>wireStrippers</a>
+                </h5>
+                </tr>
+                  <tr>
+                  <h5>
+                  <a>toolBelt</a>
+                </h5>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+      <hr  id="mainApplication" class="featurette-divider">
+
+      <div id="teh"  class="row featurette">
+        <div class="col-md-4">
+          <h2 class="featurette-heading">Ready to export your cart to a retail location?
+            <span class="text-muted">
+              If so press the export and map button and we'll show you where to find your items 
+            </span>
+          </h2>
+          <br/><br/>
+              <div id="result2" style="visibility:hidden">
+                  <h4>
+                  Store selected: <a>The Home Depot</a>
+                  </h4>
+                  <h5>
+                  Store id: Store 111
+                  </h5>
+              </div>
+            <br/><br/>
+                  <h4>
+                  Items in cart: 0
+                  </h4>
+            <br/><br/>
+          
+            <br/><br/>
+              <button style="width:150px" type="button" class="btn btn-default">Export and map</button>
+        </div>
         <div id="map-canvas"class="col-md-8">
-          <!--<iframe
-              width="800"
-              height="450"
-              frameborder="0" style="border:0"
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAPvhoDgCFn4oZUvDrV4TguBBwczsPQSGo
-              &q=Atlanta+GA">
-          </iframe>
-        -->
         </div>
       </div>
 
@@ -127,9 +305,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 	   <!-- Two image heads -->
       <div id="ourTeam" class="row">
         <div class="col-lg-4">
-          <img class="img-circle" src="WebContent/images/our-team/Vito.jpg" alt="Vito" style="width: 140px; height: 140px;">
+          <img class="img-circle" src="WebContent/images/our-team/Vito-2.jpg" alt="Vito" style="width: 140px; height: 140px;">
           <h2>Vito</h2>
-          <p>Something about Vito</p>
+          <p>Vito is a cool guy. He works for Comcast, worships Microsoft, and will never wake up the 1st time you ask him to.</p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
          <h2>Our Team</h2>
@@ -137,7 +315,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <div class="col-lg-4">
           <img class="img-circle" src="WebContent/images/our-team/Drew.jpg" alt="Drew" style="width: 140px; height: 140px;">
           <h2>Drew</h2>
-          <p>Something about Drew</p>
+          <p>Drew is the homie. I'm too tired to think of why. I want my bed.</p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 	  
@@ -151,12 +329,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <div class="col-lg-4">
           <img class="img-circle" src="WebContent/images/our-team/Tommy.jpg" alt="Tommy" style="width: 140px; height: 140px;">
           <h2>Tommy</h2>
-          <p>Something about Tommy</p>
+          <p>Tommy is a Juinor Computer Science student at KSU. He works as a Co-op at Georgia Tech Reasearch Institute. When he's not stroking his beard, he's probably writing some cool software that's going to revolutionize the planet (whilst stroking his beard). </p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="img-circle" src="WebContent/images/our-team/Shah.jpg" alt="Shah" style="width: 140px; height: 140px;">
           <h2>Shah</h2>
-          <p>Something about Shah</p>
+          <p>Shah Zafrani is a laid back yet hard working individual who is capable of buckling down and completing any task you place in front of him.  His work ethic rivals that of fortune 500 CEO’s, but outside of work Shah is the life of any party or social gathering.  He finds solace and enjoyment in the small things in life.</p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 	  
@@ -165,5 +343,4 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
   </body>
 </html>
-
 </head>
