@@ -38,6 +38,9 @@ public class ItemArrayAdapter extends ArrayAdapter<Item> {
         TextView itemText = (TextView) convertView.findViewById(R.id.item_name);
         itemText.setText(item.getName());
 
+        TextView itemTypeText = (TextView) convertView.findViewById(R.id.item_type_text);
+        itemTypeText.setText(item.getType().toString());
+
         return convertView;
     }
 }
